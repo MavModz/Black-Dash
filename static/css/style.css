@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900");
+
+.bg-nav {
+    background: #c31432;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #240b36, #c31432);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #240b36, #c31432);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.mt-100 {
+    margin-top: 100px;
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+@keyframes input-focus {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.01);
+    }
+}
+
+.card-body .btn:hover {
+    animation-name: shine;
+    animation-duration: 200ms;
+}
+
+@keyframes shine {
+    0% {
+        background: linear-gradient(30deg,
+                hsl(260, 85%, 95%) 0%,
+                hsl(206, 100%, 58%) 25%);
+    }
+
+    25% {
+        background: linear-gradient(30deg,
+                hslhsl(210, 92%, 14%) 0%,
+                hsl(260, 85%, 95%) 25%,
+                hsl(206, 100%, 58%) 50%);
+    }
+
+    50% {
+        background: linear-gradient(30deg,
+                hsl(206, 100%, 58%) 0%,
+                hsl(260, 85%, 95%) 50%,
+                hsl(206, 100%, 58%) 75%);
+    }
+
+    75% {
+        background: linear-gradient(30deg,
+                hsl(206, 100%, 58%) 0%,
+                hsl(260, 85%, 95%) 75%,
+                hsl(206, 100%, 58%) 100%);
+    }
+
+    100% {
+        background: linear-gradient(30deg,
+                hsl(206, 100%, 58%) 0%,
+                hsl(260, 85%, 95%) 100%);
+    }
+}
+
+.navbar-custom {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.navbar-custom .nav-link {
+    margin-right: 10px;
+}
+
+
+/* Customize the navigation bar */
+.navbar-custom {
+    border-radius: 0;
+    margin-bottom: 30px;
+}
+
+/* Customize the links in the navigation bar */
+.navbar-custom .nav-link {
+    color: #fff;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* Customize the logout button */
+.navbar-custom .btn-outline-primary {
+    border-radius: 20px;
+}
+
+/* Customize the cards */
+.card {
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+.card-body h2 {
+    color: #fff;
+}
+
+.card-body h4 {
+    color: #fff;
+}
+
+/* Customize the table */
+.table {
+    margin-bottom: 30px;
+}
+
+/* Customize the "Add New" button */
+.btn-danger {
+    border-radius: 20px;
+}
+
+.card-color-1 {
+    background: linear-gradient(94.38deg, #008CE4 -1.08%, #00AF9E 96.88%)
+}
+
+.card-color-2 {
+    background: linear-gradient(95.13deg, #ed7c58 -19.76%, #f56666 108.11%);
+}
+
+.card-color-3 {
+    background: linear-gradient(95.13deg, #ed7c58 -19.76%, #f56666 108.11%);
+}
+
+.card-color-4 {
+    background-color: #B0BEC5;
+}
+
+/* NOTIFICATION */
+
+.notification, .custom-alert {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    width: max-content;
+    padding: 20px 15px;
+    border-radius: 4px;
+    background-color: #0f202c;
+    color: #f6f5f9;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(30px);
+    opacity: 0;
+    visibility: hidden;
+    animation: fade-in 4s linear forwards;
+}
+
+.custom-alert.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.custom-alert.alert-failure {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.custom-alert .alert-message {
+    margin: 0;
+}
+
+.custom-alert.alert-success .alert-message::before {
+    content: "✓";
+    margin-right: 5px;
+}
+
+.custom-alert.alert-failure .alert-message::before {
+    content: "✗";
+    margin-right: 5px;
+}
+
+.notification_progress {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    width: calc(100% - 10px);
+    height: 3px;
+    transform: scaleX(0);
+    transform-origin: left;
+    background-image: linear-gradient(to right, #539bdb, #3250bf);
+    border-radius: inherit;
+    animation: load 3s 0.25s linear forwards;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+    }
+
+    5% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes load {
+    to {
+        transform: scaleX(1);
+    }
+}

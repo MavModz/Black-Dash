@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!--Material Icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp" />
+    <!--Admin StyleSheet-->
+    <link rel="stylesheet" href=" {{ url_for('static', filename='css/admin_dashboard.css')}} ">
+
+</head>
+
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='img/user-2.jpg')}}">
+                    <h2>EGA <span class="danger">TOR</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-symbols-sharp">close</span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a href="#" class="active">
+                    <span class="material-symbols-sharp">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+
+                <a href="#">
+                    <span class="material-symbols-sharp">person</span>
+                    <h3>Users</h3>
+                </a>
+
+                <a href="#">
+                    <span class="material-symbols-sharp">insights</span>
+                    <h3>Analytics</h3>
+                </a>
+
+                <a href="#">
+                    <span class="material-symbols-sharp">mail</span>
+                    <h3>Messages</h3>
+                    <span class="message-count">26</span>
+                </a>
+
+                <a href="#">
+                    <span class="material-symbols-sharp">report</span>
+                    <h3>Reports</h3>
+                </a>
+
+                <a href="#">
+                    <span class="material-symbols-sharp">manage_accounts</span>
+                    <h3>Settings</h3>
+                </a>
+
+                <a href="/logout">
+                    <span class="material-symbols-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+        <!--END OF ASIDE-->
+        <main>
+            <h1>Dashboard</h1>
+            <div class="date">
+                <input type="date" id="dateInput" value="" />
+            </div>
+            <div class="insights">
+                <div class="sales">
+                    <span class="material-symbols-sharp">analytics</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total Sales</h3>
+                            <h1>$25,000</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="number">
+                                <p>81%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Last 24 Hours</small>
+                </div>
+                <!--END OF 1st CARD-->
+                <div class="expenses">
+                    <span class="material-symbols-sharp">bar_chart</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total Expenses</h3>
+                            <h1>$5,000</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="number">
+                                <p>62%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Last 24 Hours</small>
+                </div>
+                <!--END OF 2nd CARD-->
+                <div class="income">
+                    <span class="material-symbols-sharp">payments</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total Revenue</h3>
+                            <h1>$60,000</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="number">
+                                <p>44%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Last 24 Hours</small>
+                </div>
+                <!--END OF 3rd CARD-->
+            </div>
+            <!--END OF INSIGHTS-->
+
+            <div class="recent-orders">
+                <h2>Recent Orders</h2>
+                <table id="user-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Drone</td>
+                            <td>IC2341</td>
+                            <td>Cash on Delivery</td>
+                            <td class="warning">Pending</td>
+                            <td class="primary">Details</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#">Show All</a>
+            </div>
+        </main>
+        <!--END OF MAIN-->
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-symbols-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-symbols-sharp active">light_mode</span>
+                    <span class="material-symbols-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b>Gaurav</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="{{ url_for('static', filename='img/user-2.jpg')}}">
+                    </div>
+                </div>
+            </div>
+            <!--END OF TOP-->
+            <div class="recent-updates">
+                <h2>Recent Updates</h2>
+                <div class="updates">
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="{{ url_for('static', filename='img/user-2.jpg')}}">
+                        </div>
+                        <div class="message">
+                            <p><b>Paul Walker</b> Uploaded the Documents</p>
+                            <small class="text-muted">2 min Ago</small>
+                        </div>
+                    </div>
+
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="{{ url_for('static', filename='img/user-2.jpg')}}">
+                        </div>
+                        <div class="message">
+                            <p><b>Dominic Toretto</b> Updated the Profile</p>
+                            <small class="text-muted">5 min Ago</small>
+                        </div>
+                    </div>
+
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="{{ url_for('static', filename='img/user-2.jpg')}}">
+                        </div>
+                        <div class="message">
+                            <p><b>Roman Pearce</b> Successfully Registered</p>
+                            <small class="text-muted">25 min Ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--END OF RECENT UPDATES-->
+            <div class="sales-analytics">
+                <h2>Student Analytics</h2>
+                <div class="items online">
+                    <div class="icon">
+                        <span class="material-symbols-sharp">stacked_line_chart</span>
+                    </div>
+                    <div class="right">
+                        <div class="info">
+                            <h3>Online Enrolls</h3>
+                            <small class="text-muted">Last 24 Hours</small>
+                        </div>
+                        <h5 class="success">+39%</h5>
+                        <h3>1125</h3>
+                    </div>
+                </div>
+
+                <div class="items offline">
+                    <div class="icon">
+                        <span class="material-symbols-sharp">post_add</span>
+                    </div>
+                    <div class="right">
+                        <div class="info">
+                            <h3>Offline Enrolls</h3>
+                            <small class="text-muted">Last 24 Hours</small>
+                        </div>
+                        <h5 class="danger">+17%</h5>
+                        <h3>124</h3>
+                    </div>
+                </div>
+
+                <div class="items customers">
+                    <div class="icon">
+                        <span class="material-symbols-sharp">person</span>
+                    </div>
+                    <div class="right">
+                        <div class="info">
+                            <h3>New Enrolls</h3>
+                            <small class="text-muted">Last 24 Hours</small>
+                        </div>
+                        <h5 class="warning">+20%</h5>
+                        <h3>840</h3>
+                    </div>
+                </div>
+                <div class="items add-product">
+                    <div>
+                        <span class="material-symbols-sharp">person_add</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--JAVASCRIPT FOR ADMIN DASHBOARD-->
+    <script src="{{ url_for('static', filename='js/admin_dashboard.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/user_details.js')}}"></script>
+</body>
+
+</html>

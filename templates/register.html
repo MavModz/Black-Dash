@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login-theme.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+
+</head>
+
+<body>
+    <div class="svg-container">
+        <!-- Replace this with your SVG code or URL -->
+        <svg width="500" height="500" viewBox="0 0 100 100">
+            <img class="logo-size" src="{{ url_for('static', filename='img/graphic3.svg') }}">
+        </svg>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="login-container shadow">
+                    <h3>Register New Account</h3>
+                    <p>Fill in the details below to create a new account.</p>
+                    <form class="form" method="post" action="/add_user">
+                        <input type="text" name="uname" class="form-control mb-3" placeholder="Name" required>
+                        <input type="email" name="uemail" class="form-control mb-3" placeholder="Email" required>
+                        <input type="password" name="upassword" class="form-control mb-3" placeholder="Password"
+                            required>
+                        <div>
+                            <button id="register-btn" type="submit" class="ibtn">Register</button><a href="/login">Login
+                                instead?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var registerBtn = document.getElementById("register-btn");
+        registerBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            var form = event.target.form;
+            var name = form.uname.value;
+            var email = form.uemail.value;
+            var password = form.upassword.value;
+
+            // Email validation using regular expression
+            var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (!email.match(emailRegex)) {
+                showAlert("failure", "Please enter a valid email address!");
+                return;
+            }
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    if (this.responseText == "success") {
+                        // Display custom alert box for successful registration
+                        var successAlert = document.createElement("div");
+                        successAlert.innerHTML = "Registration successful!";
+                        successAlert.classList.add("custom-alert");
+                        document.body.appendChild(successAlert);
+                        setTimeout(function () {
+                            window.location.href = "/login";
+                        }, 1500); // 1.5 second delay
+                    } else {
+                        // Display custom alert box for failed registration
+                        var failureAlert = document.createElement("div");
+                        failureAlert.innerHTML = "Registration failed. Email already exists!";
+                        failureAlert.classList.add("custom-alert");
+                        document.body.appendChild(failureAlert);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1500); // 1.5 second delay
+                    }
+                }
+            };
+            xhttp.open("POST", "/add_user", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("uname=" + name + "&uemail=" + email + "&upassword=" + password);
+        });
+
+        // Function to display custom alert box with given status and message
+        function showAlert(status, message) {
+            var alertBox = document.createElement("div");
+            alertBox.innerHTML = message;
+            alertBox.classList.add("custom-alert");
+            alertBox.classList.add(status);
+            document.body.appendChild(alertBox);
+        }
+
+    </script>
+</body>
+
+</html>
