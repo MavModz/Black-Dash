@@ -14,7 +14,7 @@ fetch('/api/chart_data')
 
     // Count the occurrences of each topic
     const topicCounts = {};
-    sectors.forEach(topic => {
+    topics.forEach(topic => {
         topicCounts[topic] = (topicCounts[topic] || 0) + 1;
     });
 
@@ -41,8 +41,8 @@ fetch('/api/chart_data')
         {
             label: 'Topics',
             data: topicData,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 3)',
+            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+            borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1
         },
         {
