@@ -11,7 +11,7 @@ conn = mysql.connector.connect(
 cursor = conn.cursor()
 
 # Read JSON data from the file
-with open('E:\Python\Black Dash\jsondata.json', encoding='utf-8') as file:
+with open('F:\Python\Black-Dash\jsondata.json', encoding='utf-8') as file:
     json_data = json.load(file)
 
 # Iterate over the JSON data and generate INSERT statements
@@ -62,7 +62,6 @@ def register():
 
 # Route For Login
 
-
 @app.route('/login')
 def login():
     if 'user_id' not in session:
@@ -72,22 +71,20 @@ def login():
 
 # Logout A User
 
-
 @app.route('/logout')
 def logout():
-    # Remove user_id and user_type from session
+    # Pop out user_id and user_type from session
     session.pop('user_id', None)
     session.pop('user_type', None)
     return redirect('/')
 
 # Route for dashboard
 
-
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' in session:
         # Check user type in session
-        if 'user_type' in session and session['user_type'] == 'admin':
+        if 'user_type' in session and session['user_type'] == 'Admin':
             return render_template('admin_dashboard.html')
         else:
             return render_template('dashboard.html')
@@ -95,7 +92,6 @@ def dashboard():
         return redirect('/login')
 
 # VALIDATE AND LOGIN USER
-
 
 @app.route('/login_validation', methods=['POST'])
 def login_validation():
@@ -116,17 +112,16 @@ def login_validation():
         # Store user_type in session
         session['user_type'] = users[0][1]
         if users[0][1] == 'admin':
-            # Return success status and message as JSON response
+            # Return success status and message
             return jsonify({'status': 'success', 'message': 'Login successful!', 'redirect': '/admin'})
         else:
-            # Return success status and message as JSON response
+            # Return success status and message
             return jsonify({'status': 'success', 'message': 'Login successful!', 'redirect': '/dashboard'})
     else:
-        # Return failure status and message as JSON response
+        # Return failure status and message
         return jsonify({'status': 'failure', 'message': 'Email or password is incorrect!'})
 
 # REGISTER A USER
-
 
 @app.route('/add_user', methods=['POST'])
 def add_user():
@@ -151,7 +146,6 @@ def add_user():
 
 # FETCH USER NAME
 
-
 @app.route('/get_user_name')
 def get_user_name():
     if 'user_id' in session:
@@ -171,7 +165,7 @@ def get_user_name():
 
 @app.route('/user_details', methods=['GET'])
 def user_details():
-    # Fetch only the latest 6 rows from the database, ordered by a specific column in descending order
+    # Fetch only the latest 6 rows from the database
     cursor.execute("SELECT * FROM users ORDER BY user_id DESC LIMIT 6")
     rows = cursor.fetchall()
     print(rows)
@@ -188,7 +182,6 @@ def user_details():
 
 # Reset Password
 
-
 @app.route('/reset_password', methods=['POST'])
 def reset_password():
     email = request.form.get('email')
@@ -198,7 +191,7 @@ def reset_password():
     if not re.match(email_regex, email):
         return jsonify({'status': 'failure', 'message': 'Please enter a valid email address!'})
 
-    # Update password in the database using parameterized query
+    # Update password in the database
     cursor.execute(
         "UPDATE users SET password = %s WHERE email = %s", (password, email))
     conn.commit()
@@ -214,40 +207,64 @@ def reset_password():
 def reset():
     return render_template('reset_password.html')
 
-# API endpoint for chart data
+# API for chart data
 @app.route('/api/chart_data', methods=['GET'])
 def api_chart_data():
     # Fetch data from the database
     cursor.execute(
-        "SELECT sector, topic, country, COUNT(*) as count FROM user_data GROUP BY sector, topic, country"
+        "SELECT sector, topic, country, intensity, likelihood, relevance, end_year, region, COUNT(*) as count FROM user_data GROUP BY sector, topic, country, intensity, likelihood, relevance, end_year, region"
     )
     rows = cursor.fetchall()
 
-    # Prepare data for charts
     sectors = []
     topics = []
     countries = []
+    intensities = []
+    likelihoods = []
+    relevances = []
+    end_years = []
+    regions = []
     counts = []
 
     for row in rows:
         sector = row[0]
         topic = row[1]
         country = row[2]
-        count = row[3]
+        intensity = row[3]
+        likelihood = row[4]
+        relevance = row[5]
+        end_year = row[6]
+        region = row[7]
+        count = row[8]
 
         sectors.append(sector)
         topics.append(topic)
         countries.append(country)
+        intensities.append(intensity)
+        likelihoods.append(likelihood)
+        relevances.append(relevance)
+        end_years.append(end_year)
+        regions.append(region)
         counts.append(count)
 
     chart_data = {
         'sectors': sectors,
         'topics': topics,
         'countries': countries,
+        'intensities': intensities,
+        'likelihoods': likelihoods,
+        'relevances': relevances,
+        'end_years': end_years,
+        'regions': regions,
         'counts': counts
     }
 
     return jsonify(chart_data)
+
+
+@app.route('/test')
+def test():
+    return render_template('test.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

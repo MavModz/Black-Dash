@@ -5,6 +5,8 @@ fetch('/api/chart_data')
     const sectors = data.sectors;
     const topics = data.topics;
     const countries = data.countries;
+    const intense = data.intense;
+    const likelihoods = data.likelihood;
 
     // Count the occurrences of each sector
     const sectorCounts = {};
@@ -24,10 +26,24 @@ fetch('/api/chart_data')
         countryCounts[country] = (countryCounts[country] || 0) + 1;
     });
 
+    // Count the occurrences of each intensity
+    const intenseCounts={};
+    intense.forEach(intensity => {
+        intenseCounts[intensity] = (intenseCounts[intensity] || 0) + 1;
+    });
+
+    // Count the occurrences of each likehood
+    const likelihoodCounts={};
+    likelihood.forEach(likelihood => {
+        likelihoodCounts[likelihood] = (likelihoodCounts[likelihood] || 0) + 1;
+    });
+
     // Prepare the data for the chart
     const sectorData = Object.values(sectorCounts);
     const topicData = Object.values(topicCounts);
     const countryData = Object.values(countryCounts);
+    const intenseData = Object.values(intenseCounts);
+    const likelihoodsData = Object.values(likelihoodCounts);
 
     const chartData = {
         labels: Object.keys(sectorCounts),
@@ -41,8 +57,8 @@ fetch('/api/chart_data')
         {
             label: 'Topics',
             data: topicData,
-            backgroundColor: 'rgba(255, 99, 132, 0.6)',
-            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(192, 192, 75, 0.2)',
+            borderColor: 'rgba(192, 192, 75, 1)',
             borderWidth: 1
         },
         {
@@ -50,6 +66,20 @@ fetch('/api/chart_data')
             data: countryData,
             backgroundColor: 'rgba(192, 75, 192, 0.2)',
             borderColor: 'rgba(192, 75, 192, 1)',
+            borderWidth: 1
+        },
+        {
+            label: 'Intensity',
+            data: intenseData,
+            backgroundColor: 'rgba(75, 192, 75, 0.2)',
+            borderColor: 'rgba(75, 192, 75, 1)',
+            borderWidth: 1
+        },
+        {
+            label: 'Likelihood',
+            data: likelihoodsData,
+            backgroundColor: 'rgba(75, 192, 75, 0.2)',
+            borderColor: 'rgba(75, 192, 75, 1)',
             borderWidth: 1
         }]
     };
